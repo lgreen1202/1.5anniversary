@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 1.5 Years!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fdf2f8; /* A very light pink */
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .heart-bg {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 85C25 60 10 45 10 30C10 15 25 5 40 15C45 20 50 25 50 25C50 25 55 20 60 15C75 5 90 15 90 30C90 45 75 60 50 85Z' fill='%23fce7f3'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 400px;
+            animation: pulse 10s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Styles for floating love messages */
+        #love-message-container .love-message {
+            position: absolute;
+            bottom: -100px; /* Start off-screen */
+            color: rgba(255, 255, 255, 0.5); /* Softer color */
+            text-shadow: 0 0 8px rgba(255, 192, 203, 0.4);
+            animation-name: fade-float;
+            animation-timing-function: linear;
+            white-space: nowrap; /* Prevent messages from wrapping */
+        }
+
+        @keyframes fade-float {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh); /* Move all the way up and off screen */
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Initial Countdown Screen -->
+    <div id="initial-countdown-screen" class="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden heart-bg">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <!-- Container for floating messages -->
+        <div id="love-message-container" class="absolute inset-0 z-10 overflow-hidden pointer-events-none"></div>
+        <div class="relative z-20 text-white">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Our Special Day is Coming</h1>
+            <p class="text-lg md:text-xl mb-8">Counting down to our 1.5 years together</p>
+            <div id="initial-timer" class="text-3xl sm:text-4xl md:text-5xl font-bold grid grid-cols-4 gap-2 sm:gap-4 max-w-2xl mx-auto">
+                <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="initial-days"></span><span class="block text-xs sm:text-sm font-normal mt-2">Days</span></div>
+                <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="initial-hours"></span><span class="block text-xs sm:text-sm font-normal mt-2">Hours</span></div>
+                <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="initial-minutes"></span><span class="block text-xs sm:text-sm font-normal mt-2">Minutes</span></div>
+                <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="initial-seconds"></span><span class="block text-xs sm:text-sm font-normal mt-2">Seconds</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Website Content (Initially Hidden) -->
+    <div id="main-content" style="display: none;">
+        <!-- Hero Section -->
+        <header class="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden heart-bg">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative z-10 p-4">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-2 tracking-wider">Happy 1.5 Years, My Love</h1>
+                <p class="text-lg sm:text-xl md:text-2xl font-light">From [Your Name] to [Her Name]</p>
+                <div class="mt-8 text-lg">
+                    <p>18 months. 548 days. Endless memories.</p>
+                </div>
+            </div>
+            <div class="absolute bottom-10 text-white animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </header>
+
+        <main class="py-16 md:py-24 bg-white">
+            <!-- Our Story Section -->
+            <section id="story" class="container mx-auto px-4 lg:px-8 fade-in">
+                <h2 class="text-4xl text-center font-bold text-pink-800 mb-12">Our Journey Together</h2>
+                <!-- Timeline Container -->
+                <div class="relative container mx-auto px-6 flex flex-col space-y-8">
+                    <!-- Vertical Line -->
+                    <div class="absolute w-1 h-full bg-pink-300 shadow-md top-0 left-1/2 -translate-x-1/2"></div>
+                    
+                    <!-- Timeline Item 1 -->
+                    <div class="relative md:self-start md:w-1/2 md:pr-12">
+                        <div class="p-4 bg-pink-100 rounded-lg shadow-md">
+                            <h3 class="mb-3 font-bold text-pink-900 text-xl">The Day We Met</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">[Date of meeting] - A short, sweet memory of how you met or your first date. "I still remember seeing you for the first time..."</p>
+                        </div>
+                        <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-1/2 w-8 h-8 rounded-full bg-pink-800 flex items-center justify-center text-white font-bold">1</div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="relative self-end md:w-1/2 md:pl-12">
+                         <div class="p-4 bg-rose-100 rounded-lg shadow-md">
+                            <h3 class="mb-3 font-bold text-rose-900 text-xl">A Favorite Memory</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Describe a special trip, a funny moment, or a time you felt especially close. "That time we went to [place] and..."</p>
+                        </div>
+                        <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 md:left-0 md:-translate-x-1/2 w-8 h-8 rounded-full bg-pink-800 flex items-center justify-center text-white font-bold">2</div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="relative md:self-start md:w-1/2 md:pr-12">
+                        <div class="p-4 bg-pink-100 rounded-lg shadow-md">
+                            <h3 class="mb-3 font-bold text-pink-900 text-xl">Growing Together</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Mention something you've learned or a way you've grown together. "Looking back, I love how we've supported each other through..."</p>
+                        </div>
+                        <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-1/2 w-8 h-8 rounded-full bg-pink-800 flex items-center justify-center text-white font-bold">3</div>
+                    </div>
+
+                    <!-- Timeline Item 4 -->
+                    <div class="relative self-end md:w-1/2 md:pl-12">
+                         <div class="p-4 bg-rose-100 rounded-lg shadow-md">
+                            <h3 class="mb-3 font-bold text-rose-900 text-xl">Today & Forever</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">"And now, 1.5 years later, my love for you is stronger than ever. I can't wait to see what's next for us."</p>
+                        </div>
+                        <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 md:left-0 md:-translate-x-1/2 w-8 h-8 rounded-full bg-pink-800 flex items-center justify-center text-white font-bold">4</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Photo Gallery -->
+            <section id="gallery" class="py-16 md:py-24 bg-fdf2f8 fade-in">
+                <div class="container mx-auto px-4 lg:px-8">
+                    <h2 class="text-4xl text-center font-bold text-pink-800 mb-12">Our Moments</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+                        <div class="grid gap-2 sm:gap-4">
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x600/f472b6/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x400/ec4899/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                        </div>
+                        <div class="grid gap-2 sm:gap-4">
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x400/db2777/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x600/c026d3/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                        </div>
+                        <div class="grid gap-2 sm:gap-4">
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x600/a21caf/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x400/86198f/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                        </div>
+                        <div class="grid gap-2 sm:gap-4">
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x400/701a75/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                            <div><img class="h-auto max-w-full rounded-lg shadow-lg hover:scale-105 transition-transform duration-300" src="https://placehold.co/400x600/be185d/ffffff?text=Our+Photo" alt="A photo of us"></div>
+                        </div>
+                    </div>
+                     <p class="text-center mt-8 text-gray-600 px-4">Right-click on the placeholder images and replace the URL to add your own photos!</p>
+                </div>
+            </section>
+            
+            <!-- Reasons I Love You -->
+            <section id="reasons" class="py-16 md:py-24 bg-white fade-in">
+                <div class="container mx-auto px-6 lg:px-8 text-center">
+                    <h2 class="text-4xl font-bold text-pink-800 mb-8">A Few Reasons Why I Love You</h2>
+                    <div id="reason-display" class="min-h-[100px] flex items-center justify-center p-4">
+                        <p class="text-xl sm:text-2xl text-rose-700 italic">Click the button for a reason...</p>
+                    </div>
+                    <button id="reason-button" class="mt-4 bg-pink-600 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-700 transition-all duration-300 shadow-lg transform hover:scale-105">
+                        Tell Me Why
+                    </button>
+                </div>
+            </section>
+
+            <!-- A Special Note -->
+            <section id="note" class="py-16 md:py-24 bg-rose-50 fade-in">
+                <div class="container mx-auto px-6 lg:px-8 max-w-3xl text-center">
+                    <h2 class="text-4xl font-bold text-pink-800 mb-8">A Note For You</h2>
+                    <div class="bg-white p-6 sm:p-8 rounded-lg shadow-xl text-left">
+                        <p class="text-lg mb-4">My Dearest [Her Name],</p>
+                        <p class="text-gray-700 mb-4">
+                            It feels like just yesterday we started this journey, and now we're here, celebrating 1.5 amazing years together. This is where you can write your personal, heartfelt letter. Talk about your feelings, your hopes for the future, and what she means to you.
+                        </p>
+                        <p class="text-gray-700 mb-6">
+                            Every day with you is a gift. Thank you for everything.
+                        </p>
+                        <p class="text-lg text-right">All my love,<br>[Your Name]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Countdown to 2 years -->
+            <section id="countdown" class="py-16 md:py-24 bg-pink-800 text-white fade-in">
+                <div class="container mx-auto px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">To Our Next Chapter</h2>
+                    <p class="text-lg sm:text-xl mb-8">Counting down to our 2 year anniversary!</p>
+                    <div id="countdown-timer" class="text-3xl sm:text-4xl md:text-5xl font-bold grid grid-cols-4 gap-2 sm:gap-4 max-w-2xl mx-auto">
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="days"></span><span class="block text-xs sm:text-sm font-normal">Days</span></div>
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="hours"></span><span class="block text-xs sm:text-sm font-normal">Hours</span></div>
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="minutes"></span><span class="block text-xs sm:text-sm font-normal">Minutes</span></div>
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg"><span id="seconds"></span><span class="block text-xs sm:text-sm font-normal">Seconds</span></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-gray-800 text-white text-center p-6">
+            <p>Made with ❤️ for the best girlfriend in the world.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Love Messages Animation ---
+        const loveMessages = [
+            "I love you more every day.", "You are my everything.", "My soulmate.", "Forever and always.",
+            "Can't wait for our day.", "My missing piece.", "You make me so happy.", "Thinking of you.", "My beautiful girl."
+        ];
+        let loveMessageInterval;
+
+        function createLoveMessage() {
+            const container = document.getElementById('love-message-container');
+            if (!container) return;
+
+            const messageEl = document.createElement('span');
+            messageEl.classList.add('love-message');
+            messageEl.textContent = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            
+            messageEl.style.left = `${Math.random() * 90}vw`;
+            messageEl.style.fontSize = `${Math.random() * 1 + 1.2}rem`; // 1.2rem to 2.2rem
+            const duration = Math.random() * 8 + 10; // 10s to 18s
+            messageEl.style.animationDuration = `${duration}s`;
+
+            container.appendChild(messageEl);
+
+            setTimeout(() => {
+                if (messageEl) {
+                    messageEl.remove();
+                }
+            }, duration * 1000);
+        }
+
+        // --- Initial Countdown & Content Reveal ---
+        // IMPORTANT: Set your 1.5-year anniversary date here!
+        // The format is "Month Day, Year HH:MM:SS" e.g., "July 10, 2025 00:00:00"
+        const onePointFiveYearDate = new Date("July 10, 2025 00:00:00").getTime();
+
+        // Start the love messages right away
+        loveMessageInterval = setInterval(createLoveMessage, 2000); // Every 2 seconds
+
+        const initialCountdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = onePointFiveYearDate - now;
+
+            // If the countdown is over, reveal the main site
+            if (distance < 0) {
+                clearInterval(initialCountdownInterval);
+                clearInterval(loveMessageInterval); // Stop creating love messages
+                const initialScreen = document.getElementById('initial-countdown-screen');
+                const mainContent = document.getElementById('main-content');
+                
+                if (initialScreen) initialScreen.style.display = 'none';
+                if (mainContent) mainContent.style.display = 'block';
+
+                // Trigger fade-in for newly visible elements
+                const faders = document.querySelectorAll('.fade-in');
+                 faders.forEach(fader => {
+                    appearOnScroll.observe(fader);
+                });
+                return; // Stop the function here
+            }
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the elements, checking if they exist first
+            const elDays = document.getElementById("initial-days");
+            const elHours = document.getElementById("initial-hours");
+            const elMinutes = document.getElementById("initial-minutes");
+            const elSeconds = document.getElementById("initial-seconds");
+
+            if(elDays) elDays.innerText = days;
+            if(elHours) elHours.innerText = hours;
+            if(elMinutes) elMinutes.innerText = minutes;
+            if(elSeconds) elSeconds.innerText = seconds;
+
+        }, 1000);
+
+
+        // --- Fade-in on Scroll ---
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        // --- Reasons I Love You ---
+        const reasons = [
+            "Your incredible smile.", "The way you laugh at my silly jokes.", "How kind and compassionate you are.",
+            "Your ambition and drive.", "How you make me feel like the luckiest person alive.", "Our late-night conversations.",
+            "The way you look at me.", "Your sense of adventure.", "How supportive you are of my dreams.",
+            "Simply because you are you." // Add more reasons here!
+        ];
+        const reasonButton = document.getElementById('reason-button');
+        const reasonDisplay = document.getElementById('reason-display').querySelector('p');
+        let usedReasons = [];
+
+        if (reasonButton) {
+            reasonButton.addEventListener('click', () => {
+                if (usedReasons.length === reasons.length) {
+                    usedReasons = []; // Reset if all reasons have been shown
+                }
+                let newReason;
+                do {
+                    newReason = reasons[Math.floor(Math.random() * reasons.length)];
+                } while (usedReasons.includes(newReason));
+                usedReasons.push(newReason);
+                reasonDisplay.style.opacity = 0;
+                setTimeout(() => {
+                    reasonDisplay.textContent = newReason;
+                    reasonDisplay.style.opacity = 1;
+                }, 300);
+            });
+        }
+
+        // --- Countdown Timer (to 2 years) ---
+        // IMPORTANT: Set your 2-year anniversary date here!
+        const twoYearDate = new Date("January 7, 2026 00:00:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = twoYearDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const elDays = document.getElementById("days");
+            const elHours = document.getElementById("hours");
+            const elMinutes = document.getElementById("minutes");
+            const elSeconds = document.getElementById("seconds");
+
+            if(elDays) elDays.innerText = days;
+            if(elHours) elHours.innerText = hours;
+            if(elMinutes) elMinutes.innerText = minutes;
+            if(elSeconds) elSeconds.innerText = seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                const timerEl = document.getElementById("countdown-timer");
+                if(timerEl) timerEl.innerHTML = "<div class='col-span-4'>Happy 2 Years!</div>";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
