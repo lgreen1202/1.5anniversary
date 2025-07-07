@@ -34,6 +34,9 @@
             transform: translateY(0);
         }
         /* Styles for floating love messages */
+        #love-message-container {
+            padding: 0 20px; /* Add padding to prevent messages from touching screen edges */
+        }
         #love-message-container .love-message {
             position: absolute;
             bottom: -100px; /* Start off-screen */
@@ -42,6 +45,9 @@
             animation-name: fade-float;
             animation-timing-function: linear;
             white-space: nowrap; /* Prevent messages from wrapping */
+            max-width: calc(100% - 40px); /* Ensure messages don't overflow container */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Add ellipsis for very long messages */
         }
 
         @keyframes fade-float {
@@ -232,7 +238,9 @@
             "You're my life",
             "I love you more than life itself",
             "My beautiful girl",
-            "Missing you everyday"
+            "Missing you everyday",
+            "I need you more than words can express",
+            "You're my soulmate"
         ];
         let loveMessageInterval;
 
