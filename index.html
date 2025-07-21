@@ -191,6 +191,39 @@
                 </div>
             </section>
 
+            <!-- Plushie Collection -->
+            <section id="plushies" class="py-16 md:py-24 bg-white fade-in">
+                <div class="container mx-auto px-6 lg:px-8 text-center">
+                    <h2 class="text-4xl font-bold text-pink-800 mb-8">Your Plushie Collection</h2>
+                    <p class="text-lg text-gray-600 mb-8">Rank the plushies that I have got you by dragging them (take a screenshot and show me).</p>
+                    <div class="max-w-2xl mx-auto">
+                        <ul id="plushie-list" class="space-y-4">
+                            <li class="bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-all duration-200">
+                                <span class="flex-1 text-gray-700 font-medium">OG Boo-Boo</span>
+                            </li>
+                            <li class="bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-all duration-200">
+                                <span class="flex-1 text-gray-700 font-medium">Big Boo-Boo</span>
+                            </li>
+                            <li class="bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-all duration-200">
+                                <span class="flex-1 text-gray-700 font-medium">Carlos</span>
+                            </li>
+                            <li class="bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-all duration-200">
+                                <span class="flex-1 text-gray-700 font-medium">Axolotl</span>
+                            </li>
+                            <li class="bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-all duration-200">
+                                <span class="flex-1 text-gray-700 font-medium">Fuggler</span>
+                            </li>
+                            <li class="bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-all duration-200">
+                                <span class="flex-1 text-gray-700 font-medium">Wignman</span>
+                            </li>
+                            <li class="bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-all duration-200">
+                                <span class="flex-1 text-gray-700 font-medium">Kuromi</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
             <!-- Future Dreams Section -->
             <section id="future-dreams" class="py-16 md:py-24 bg-white fade-in">
                 <div class="container mx-auto px-6 lg:px-8 text-center">
@@ -252,7 +285,76 @@
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script>
+        // --- Plushie Collection Drag & Drop ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const plushieList = document.getElementById('plushie-list');
+            
+            // Load saved plushie order
+            const savedPlushies = JSON.parse(localStorage.getItem('plushieOrder'));
+            if (savedPlushies && savedPlushies.length === 5) {
+                const defaultPlushies = Array.from(plushieList.children);
+                plushieList.innerHTML = '';
+                
+                // Reorder the default plushies according to saved order
+                savedPlushies.forEach(savedPlushie => {
+                    const matchingPlushie = defaultPlushies.find(li => 
+                        li.querySelector('.text-gray-700').textContent === savedPlushie.name
+                    );
+                    if (matchingPlushie) {
+                        plushieList.appendChild(matchingPlushie.cloneNode(true));
+                    }
+                });
+                
+                // If any plushies are missing, append the remaining default ones
+                defaultPlushies.forEach(defaultPlushie => {
+                    const name = defaultPlushie.querySelector('.text-gray-700').textContent;
+                    if (!savedPlushies.find(p => p.name === name)) {
+                        plushieList.appendChild(defaultPlushie.cloneNode(true));
+                    }
+                });
+            }
+
+            // Initialize Sortable
+            new Sortable(plushieList, {
+                animation: 150,
+                ghostClass: 'bg-pink-100',
+                onEnd: function() {
+                    savePlushieOrder();
+                }
+            });
+
+            // Add new plushie
+            addPlushieBtn.addEventListener('click', function() {
+                const emojis = ['🧸', '🐰', '🐼', '🦊', '🐱', '🐨', '🦁', '🐯', '🐷', '🐮'];
+                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                const li = document.createElement('li');
+                li.className = 'bg-pink-50 p-4 rounded-lg shadow-md cursor-move flex items-center gap-4 transform hover:scale-102 transition-transform duration-200';
+                li.innerHTML = `
+                    <span class="text-3xl">${randomEmoji}</span>
+                    <input type="text" class="flex-1 bg-white/50 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-300" placeholder="Enter plushie name">
+                    <button class="delete-plushie text-gray-400 hover:text-red-500 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                `;
+                
+                plushieList.appendChild(li);
+            });
+
+            // Function to save plushie order
+            function savePlushieOrder() {
+                const plushies = Array.from(plushieList.children).map(li => ({
+                    emoji: li.querySelector('span').textContent,
+                    name: li.querySelector('.text-gray-700').textContent
+                }));
+                localStorage.setItem('plushieOrder', JSON.stringify(plushies));
+            }
+        });
+
         // --- Love Messages Animation ---
         const loveMessages = [
             "I love you more and more everyday",
@@ -292,7 +394,7 @@
         // --- Initial Countdown & Content Reveal ---
         // IMPORTANT: Set your 1.5-year anniversary date here!
         // The format is "Month Day, Year HH:MM:SS" e.g., "July 10, 2025 00:00:00"
-        const onePointFiveYearDate = new Date("August 3, 2025 00:00:00").getTime();
+        const onePointFiveYearDate = new Date("July 3, 2025 00:00:00").getTime();
 
         // Start the love messages right away
         loveMessageInterval = setInterval(createLoveMessage, 2000); // Every 2 seconds
